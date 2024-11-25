@@ -1,29 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+package com.example.mood_melody;
 
-    <!-- EditText for entering the feeling/mood -->
-    <EditText
-        android:id="@+id/editFeeling"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter your mood or feeling"
-        android:padding="16dp"
-        android:layout_marginBottom="16dp"
-        android:inputType="text" />
+    import android.content.Intent;
+    import android.os.Bundle;
+    import android.view.View;
+    import android.widget.Button;
+    import android.widget.EditText;
+    import android.widget.Toast;
+    import androidx.appcompat.app.AppCompatActivity;
 
-    <!-- Button to search for songs based on the entered mood -->
-    <Button
-        android:id="@+id/btnSearchText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Search Songs"
-        android:layout_marginTop="16dp"
+    public class TextActivity extends AppCompatActivity {
 
-        android:textColor="#FFFFFF"
-        android:padding="16dp" />
+    private EditText editFeeling;
 
-</LinearLayout>
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_text);
+
+    editFeeling = findViewById(R.id.editFeeling);
+    Button btnSearch = findViewById(R.id.btnSearchText);
+
+    // Set up button click listener
+    btnSearch.setOnClickListener(v -> {
+    String feeling = editFeeling.getText().toString().trim(); // Get the feeling from EditText
+
+    // Check if the feeling input is empty
+    if (!feeling.isEmpty()) {
+    // Intent to navigate to SongsActivity with the entered feeling
+    Intent intent = new Intent(TextActivity.this, SongsActivity.class);
+    intent.putExtra("FEELING", feeling); // Pass the feeling to SongsActivity
+    startActivity(intent); // Start SongsActivity
+    } else {
+    // Show a toast message if the feeling is not entered
+    Toast.makeText(TextActivity.this, "Please enter your feeling", Toast.LENGTH_SHORT).show();
+    }
+});
+ }
+    }
