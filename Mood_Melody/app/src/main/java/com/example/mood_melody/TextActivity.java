@@ -34,6 +34,6 @@ public class TextActivity extends AppCompatActivity {
                 // Show a toast message if the feeling is not entered
                 Toast.makeText(TextActivity.this, "Please enter your feeling", Toast.LENGTH_SHORT).show();
             }
-        });
-    }
+ });
+}
 }
